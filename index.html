@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific calculator</title>
+
+    <!-- Bootstrap CSS for button styling -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      /* Base styles */
+      .container {
+        /* max-width: 100%; */
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #151414;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 2px solid black;
+        margin-top: 40px;
+        width: 100%;
+        max-width: 400px;
+      }
+      body {
+        background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .clock {
+        /* text-align: center; */
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .display {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      #time {
+        color: whitesmoke;
+      }
+
+      .keys {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+      }
+
+      #screen {
+        position: relative;
+        height: 33px;
+        top: 2.5px;
+        width: 253px;
+        background-color: #bccd95;
+        text-align: right;
+        font-size: 1.5em;
+      }
+
+      .btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+      }
+
+      /* Responsive styles */
+
+      @media (max-width: 320px) {
+        .container {
+          padding: 0.5px;
+        }
+
+        .btn {
+          height: 40px;
+
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .container {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+        }
+        #screen {
+          width: 100%;
+        }
+        .clock {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .container {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+        }
+        #screen {
+          width: 100%;
+        }
+        .clock {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1440px) {
+        .container {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+        }
+        #screen {
+          width: 100%;
+        }
+        .clock {
+          width: 100%;
+        }
+      }
+      @media (max-width: 2560px) {
+        .container {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+        }
+        #screen {
+          width: 100%;
+        }
+        .clock {
+          width: 100%;
+        }
+      }
+
+      /* Display buttons row-wise */
+      .keys {
+        grid-template-columns: auto auto auto auto auto;
+      }
+    </style>
+  </head>
+  <body onload="startTime()">
+    <div class="container">
+      <!-- clock -->
+      <div class="clock">
+        <p id="time">time goes here</p>
+        <span
+          style="
+            color: white;
+            position: absolute;
+            margin-left: 260px;
+            margin-top: -55px;
+          "
+          >Casio</span
+        >
+      </div>
+      <!-- screen -->
+      <div class="display">
+        <input type="text" id="screen" readonly placeholder="0" />
+      </div>
+      <!-- calculator buttons -->
+      <div class="keys">
+        <button type="button" class="btn btn-info" onclick="sine()">sin</button>
+        <button type="button" class="btn btn-info" onclick="cosine()">
+          cos
+        </button>
+        <button type="button" class="btn btn-info" onclick="tan()">tan</button>
+        <button type="button" class="btn btn-info" onclick="invsine()">
+          asin
+        </button>
+        <button type="button" class="btn btn-info" onclick="invcosine()">
+          acos
+        </button>
+
+        <button type="button" class="btn btn-info" onclick="invtan()">
+          atan
+        </button>
+        <button type="button" class="btn btn-info" onclick="press(22/7)">
+          π
+        </button>
+        <button type="button" class="btn btn-info" onclick="ln()">ln</button>
+        <button type="button" class="btn btn-info" onclick="log()">log</button>
+        <button type="button" class="btn btn-info" onclick="percent()">
+          %
+        </button>
+
+        <button type="button" class="btn btn-info" onclick="square()">
+          sqd
+        </button>
+        <button type="button" class="btn btn-info" onclick="cube()">
+          cube
+        </button>
+        <button type="button" class="btn btn-info" onclick="sqrt()">√</button>
+        <button type="button" class="btn btn-info" onclick="press('(')">
+          (
+        </button>
+        <button type="button" class="btn btn-info" onclick="press(')')">
+          )
+        </button>
+
+        <button type="button" class="btn btn-primary" onclick="press(7)">
+          7
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(8)">
+          8
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(9)">
+          9
+        </button>
+        <button type="button" class="btn btn-danger" onclick="backSpace()">
+          Del
+        </button>
+        <button type="button" class="btn btn-danger" onclick="clearScreen('')">
+          C
+        </button>
+
+        <button type="button" class="btn btn-primary" onclick="press(4)">
+          4
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(5)">
+          5
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(6)">
+          6
+        </button>
+        <button type="button" class="btn btn-warning" onclick="press('*')">
+          x
+        </button>
+        <button type="button" class="btn btn-warning" onclick="press('/')">
+          /
+        </button>
+
+        <button type="button" class="btn btn-primary" onclick="press(1)">
+          1
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(2)">
+          2
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press(3)">
+          3
+        </button>
+        <button type="button" class="btn btn-warning" onclick="press('+')">
+          +
+        </button>
+        <button type="button" class="btn btn-warning" onclick="press('-')">
+          -
+        </button>
+
+        <button type="button" class="btn btn-primary" onclick="press(0)">
+          0
+        </button>
+        <button type="button" class="btn btn-warning" onclick="plusMinus()">
+          ±
+        </button>
+        <button type="button" class="btn btn-primary" onclick="press('.')">
+          .
+        </button>
+        <button type="button" class="btn btn-warning" onclick="Exp()">
+          Exp
+        </button>
+        <button type="button" class="btn btn-success" onclick="calculate()">
+          =
+        </button>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
